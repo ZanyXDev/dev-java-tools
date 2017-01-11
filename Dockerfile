@@ -11,8 +11,7 @@ RUN apt-get update && \
     apt-get install -y --no-install-recommends software-properties-common && \
     add-apt-repository ppa:webupd8team/java && \
     apt-get update && \
-    apt-get install -y --no-install-recommends oracle-java8-installer && \
-    rm -rf /var/lib/apt/lists/*
+    apt-get install -y --no-install-recommends oracle-java8-installer
 
 RUN rm -rf /etc/service/sshd /etc/my_init.d/00_regen_ssh_host_keys.sh
 
