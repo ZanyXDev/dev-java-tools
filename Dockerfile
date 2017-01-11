@@ -13,8 +13,10 @@ RUN echo debconf shared/accepted-oracle-license-v1-1 select true | debconf-set-s
 RUN apt-get update && \
     apt-get install -y --no-install-recommends software-properties-common && \
     add-apt-repository ppa:webupd8team/java && \
-    apt-get update && \
-    apt-get install -y --no-install-recommends oracle-java8-installer
+    apt-get update && \ 
+    apt-get upgrade -y && \
+    apt-get install -y --no-install-recommends oracle-java8-installer && \
+    apt-get install oracle-java8-set-default
 
 RUN rm -rf /etc/service/sshd /etc/my_init.d/00_regen_ssh_host_keys.sh
 
@@ -22,7 +24,10 @@ RUN rm -rf /etc/service/sshd /etc/my_init.d/00_regen_ssh_host_keys.sh
 RUN apt-get clean && rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/* /var/cache/oracle-jdk8-installer/*
 
 # Define commonly used JAVA_HOME variable
-ENV JAVA_HOME=/usr/lib/jvm/java-8-oracle/jre
+ENV JAVA_HOME=/usr/lib/jvm/java-8-oracle
+#ENV STUDIO_JDK=/usr/lib/jvm/java-8-oracle
+ENV JDK_HOME=/usr/lib/jvm/java-8-oracle
+PATH=$PATH:$JAVA_HOME/bin
 
 # Define default command.
 CMD ["/sbin/my_init", "/bin/bash"]
