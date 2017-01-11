@@ -27,7 +27,7 @@ RUN apt-get clean && rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/* /var/cache/or
 ENV JAVA_HOME=/usr/lib/jvm/java-8-oracle
 #ENV STUDIO_JDK=/usr/lib/jvm/java-8-oracle
 ENV JDK_HOME=/usr/lib/jvm/java-8-oracle
-PATH=$PATH:$JAVA_HOME/bin
+ENV PATH=$PATH:$JAVA_HOME/bin
 
 # Define default command.
 CMD ["/sbin/my_init", "/bin/bash"]
