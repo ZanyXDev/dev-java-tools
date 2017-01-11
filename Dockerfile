@@ -7,8 +7,8 @@ CMD ["/sbin/my_init"]
 # Set environment variables 
 ENV DEBIAN_FRONTEND noninteractive 
 
-RUN echo debconf shared/accepted-oracle-license-v1-1 select true | debconf-set-selections
-RUN echo debconf shared/accepted-oracle-license-v1-1 seen true | debconf-set-selections
+RUN echo debconf shared/accepted-oracle-license-v1-1 select true | debconf-set-selections && \
+    echo debconf shared/accepted-oracle-license-v1-1 seen true | debconf-set-selections
 
 RUN apt-get update && \
     apt-get install -y --no-install-recommends software-properties-common && \
@@ -19,10 +19,10 @@ RUN apt-get update && \
 RUN rm -rf /etc/service/sshd /etc/my_init.d/00_regen_ssh_host_keys.sh
 
 # Clean up APT when done.
-RUN apt-get clean && rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/*
+RUN apt-get clean && rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/* /var/cache/oracle-jdk8-installer/*
 
 # Define commonly used JAVA_HOME variable
-#ENV JAVA_HOME=/usr/lib/jvm/java-1.8.0-openjdk-amd64
+ENV JAVA_HOME=/usr/lib/jvm/java-8-oracle/jre
 
 # Define default command.
 CMD ["/sbin/my_init", "/bin/bash"]
