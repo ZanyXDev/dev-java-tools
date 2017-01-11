@@ -1,6 +1,9 @@
 FROM phusion/baseimage:latest
 MAINTAINER ZanyXdev "zanyxdev@gmail.com"
 
+# Use baseimage-docker's init system.
+CMD ["/sbin/my_init"]
+
 # Set environment variables 
 ENV DEBIAN_FRONTEND noninteractive 
 
